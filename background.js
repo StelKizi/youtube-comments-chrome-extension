@@ -3,7 +3,7 @@ let options = {
 	maxResults: '100',
 	order: 'relevance',
 	textFormat: 'plainText',
-	key: 'YOUR_API_KEY',
+	key: 'AIzaSyAek4Cxx2kPS_D63IH6Bn5i0Hrs-6HGCU8',
 };
 
 const getComments = (videoId) => {
@@ -24,8 +24,8 @@ const getComments = (videoId) => {
 				return;
 			}
 			// Examine the text in the response
-			response.json().then(function (data) {
-				console.log(data);
+			response.json().then((data) => {
+				parseAndSort(data);
 			});
 		})
 		.catch(function (err) {
@@ -55,9 +55,22 @@ const parseAndSort = (comments) => {
 		}
 	});
 
-	/* console.log(comments); */
-	/* console.log(filteredComments);
-	console.log(filteredAndSortedComments); */
+	convertToSeconds(filteredAndSortedComments);
+};
+
+const convertToSeconds = (comments) => {
+	comments = comments.map((item) => {
+		let tempArray = [];
+		let minsToSecs = 0.0;
+		tempArray = item.timestamp.split(':');
+		minsToSecs = parseFloat(tempArray[0] * 60) + parseFloat(tempArray[1]);
+
+		return {
+			timestamp: minsToSecs,
+			author: item.author,
+			comment: item.comment,
+		};
+	});
 };
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
@@ -75,5 +88,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
 chrome.runtime.onMessage.addListener((request, sender, response) => {
 	if (request.message === 'get_me_the_comments') {
 		getComments(request.videoId);
+
+		chrome.tabs.sendMessage(sender.tab.id, {
+			message: 'here_are_your_comments',
+			comments: filteredAndSortedComments,
+		});
 	}
 });
