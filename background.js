@@ -80,7 +80,7 @@ const parseAndSort = comments => {
 
   console.log(filteredAndSortedComments);
   
-  // You forgot to return the 'filteredAndSortedComments'. This array only exists within the scope of this function, not the 'getComments()' functions
+  // You forgot to return the 'filteredAndSortedComments'. This array only exists within the scope of this function, not the 'getComments()' function.
   return filteredAndSortedComments;
 };
 
