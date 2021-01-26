@@ -3,7 +3,7 @@ let options = {
   maxResults: '100',
   order: 'relevance',
   textFormat: 'plainText',
-  key: 'AIzaSyAek4Cxx2kPS_D63IH6Bn5i0Hrs-6HGCU8',
+  key: 'YOUR_API_KEY',
 };
 
 const getComments = (videoId, tabId) => {
