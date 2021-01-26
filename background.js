@@ -25,7 +25,11 @@ const getComments = (videoId, tabId) => {
       });
     })
     .catch(err => console.log(err));
-  return true;
+  
+  // You don't need to return true to keep the communication line open if you're not using the 'sendResponse()' method.
+  // When you use 'chrome.tabs.sendMessage()', you're opening a completely new line of communication.
+  // You could have just passed in the 'sendResponse()' method from your 'onMessage.addListener()' and used that instead of 'chrome.tabs.sendMessage()' and the 'tabId'
+  // return true;
 };
 
 const parseAndSort = comments => {
@@ -63,6 +67,7 @@ const parseAndSort = comments => {
     };
   });
 
+  return filteredAndSortedComments; // You forgot to return the 'filteredAndSortedComments' array; it's only visible inside the scope of this function.
   console.log(filteredAndSortedComments);
 };
 
