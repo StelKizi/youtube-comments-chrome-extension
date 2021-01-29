@@ -25,7 +25,22 @@ const getComments = (videoId, tabId) => {
       });
     })
     .catch(err => console.log(err));
-  return true;
+  
+  /*
+  You don't need to return true here. Only return true if you want to keep the communication line open from the message received from the 'foreground.js.
+  Since you are using 'chrome.tabs.sendMessage()' to send back the results, this opens up a COMPLETELY NEW communication line between 'background' and 'foreground'.
+  
+  You could have solved this a difference way (don't need the sender.tab.id):
+    1. pass the 'sendResponse()' function from 'onMessage.addListener()' to 'getComments()'
+    2. 'return true' IN THE 'onMessage.addListener()' NOT the 'getComments()'
+    3. use 'sendResponse()' instead of 'chrome.tabs.sendMessage()'
+    4. capture the response in your 'foreground.js' <-- IMPORTANT: the response will not be picked up by 'onMessage.addListener()' in your 'foreground.js';
+                                                                   it will be picked up as a response in the original 'runtime.sendMessage()' call;
+                                                                   ex. chrome.runtime.sendMessage({ message: 'get_me_the_comments',
+                                                                                                      videoId: queryParams.get('v')
+                                                                                                  }, response => console.log(response));
+  */
+  // return true;
 };
 
 const parseAndSort = comments => {
@@ -64,6 +79,9 @@ const parseAndSort = comments => {
   });
 
   console.log(filteredAndSortedComments);
+  
+  // You forgot to return the 'filteredAndSortedComments'. This array only exists within the scope of this function, not the 'getComments()' function.
+  return filteredAndSortedComments;
 };
 
 /* const convertToSeconds = comments => {
