@@ -1,0 +1,16 @@
+.popup {
+  width: 200px;
+  padding: 5px;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  height: fit-content;
+  background-color: antiquewhite;
+  font-size: 1em;
+  color: #2b2a2a;
+  opacity: 0.01;
+  border: 2px solid #2b2a2a;
+  border-radius: 2px;
+  box-shadow: 5px 5px 20px #2b2a2a;
+  transform: translate(-50%, -50%);
+}
