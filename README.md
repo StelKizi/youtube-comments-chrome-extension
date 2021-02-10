@@ -1,5 +1,7 @@
 # youtube-comments-chrome-extension
 
+A Chrome extension that checks for timestamps on a YouTube video and displays the author and the comment when the video marker hits the time mentioned on the timestamp.
+
 ## Getting started:
 
 ### Acquire the YouTube API key
