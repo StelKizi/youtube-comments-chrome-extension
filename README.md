@@ -8,7 +8,7 @@
 * Go to *Credentials* and select *CREATE CREDENTIALS* → *API key*
 * Insert the API key in the *options* object in the backround.js file
 
-* Clone the repo
+#### Clone the repo
 
 ### To install in your Chrome extensions:
 * Go to ***chrome://extensions***
