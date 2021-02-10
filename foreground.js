@@ -37,7 +37,7 @@ const displayComment = (author, comment) => {
 
   commentToShow.style.left = `${center.x}px`;
   commentToShow.style.top = `${center.y}px`;
-  commentToShow.innerText = `${author} ${comment}`;
+  commentToShow.innerText = `${author}: ${comment}`;
   document.querySelector('body').append(commentToShow);
 
   /* Opacity variables */
@@ -49,9 +49,9 @@ const displayComment = (author, comment) => {
     newX = center.x + 60.0 * Math.sin(motionSway * animatedValue) + naturalSway;
 
     commentToShow.style.top = `${newY}px`;
-    commentToShow.style.top = `${newX}px`;
+    commentToShow.style.left = `${newX}px`;
 
-    opacity = Math.sin(opacitySpeed * animatedValue);
+    alteredOpacity = Math.sin(opacitySpeed * animatedValue);
 
     commentToShow.style.opacity = alteredOpacity;
 
